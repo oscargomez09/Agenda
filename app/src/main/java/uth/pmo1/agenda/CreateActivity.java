@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -17,7 +16,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
@@ -33,7 +31,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -58,7 +55,7 @@ public class CreateActivity extends AppCompatActivity implements OnMapReadyCallb
     static final int PETICION_ACCESS_CAM = 201;
     static final int Result_galeria = 101;
     ImageView fotografia;
-    Button btnguardar;
+    Button btnguardar, btncontactos;
     ImageButton btnfoto;
     String POSTMethod, currentPath, currentPhotoPath;
     EditText nombre, apellido, telefono, latitud, longitud;
@@ -71,7 +68,8 @@ public class CreateActivity extends AppCompatActivity implements OnMapReadyCallb
 
         fotografia = (ImageView) findViewById(R.id.imageView);
         btnfoto = (ImageButton) findViewById(R.id.btnfoto);
-        btnguardar = (Button) findViewById(R.id.btnguardar);
+        btnguardar = (Button) findViewById(R.id.btnactualizar);
+        btncontactos = (Button) findViewById(R.id.btncontactos);
         nombre = (EditText) findViewById(R.id.txtnombre);
         apellido = (EditText) findViewById(R.id.txtapellido);
         telefono = (EditText) findViewById(R.id.txttelefono);
@@ -86,6 +84,14 @@ public class CreateActivity extends AppCompatActivity implements OnMapReadyCallb
             @Override
             public void onClick(View v) {
                 permisos();
+            }
+        });
+
+        btncontactos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ReadActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -219,10 +225,10 @@ public class CreateActivity extends AppCompatActivity implements OnMapReadyCallb
             nombre.setError("Debe ingresar el nombre!");
         }
         else if (v2.isEmpty()){
-            apellido.setError("Debe ingresar el apellido");
+            apellido.setError("Debe ingresar el apellido!");
         }
         else if (v3.isEmpty()) {
-            telefono.setError("Debe ingresar el telefono");
+            telefono.setError("Debe ingresar el telefono!");
         }
         else{
             File imageFile = createImageFile();
@@ -286,6 +292,7 @@ public class CreateActivity extends AppCompatActivity implements OnMapReadyCallb
                 "  " + "Almacenado";
 
         Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getApplicationContext(), ReadActivity.class));
     }
 
 
