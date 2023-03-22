@@ -63,7 +63,7 @@ public class ReadActivity extends AppCompatActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 CharSequence[]dialogo={"-> EDITAR DATOS","-> ELIMINAR DATOS"};
-                builder.setTitle(contactosArrayList.get(position).getNombres() + " " + contactosArrayList.get(position).getApellidos());
+                builder.setTitle(contactosArrayList.get(position).getId() + " " + contactosArrayList.get(position).getNombres() + " " + contactosArrayList.get(position).getApellidos());
                 builder.setItems(dialogo, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
